@@ -11,20 +11,20 @@ cv.imshow('blank',blank)
 
 gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 
-# cv.imshow('Gray',gray)
+cv.imshow('Gray',gray)
 
-# blur=cv.GaussianBlur(gray,(5,5),cv.BORDER_DEFAULT)
-# canny=cv.Canny(blur,125,175)
+blur=cv.GaussianBlur(gray,(5,5),cv.BORDER_DEFAULT)
+canny=cv.Canny(blur,125,175)
 
 
-# cv.imshow('Canny Edges',canny)
+cv.imshow('Canny Edges',canny)
 
-ret,thresh=cv.threshold(gray,125,255,cv.THRESH_BINARY)
+# ret,thresh=cv.threshold(gray,125,255,cv.THRESH_BINARY)
 
-cv.imshow('Thresh',thresh)
+# cv.imshow('Thresh',thresh)
 
-cv.imshow('thresh',thresh)
-contours,hierarchies=cv.findContours(thresh,cv.RETR_LIST,cv.CHAIN_APPROX_SIMPLE)
+# cv.imshow('thresh',thresh)
+contours,hierarchies=cv.findContours(canny,cv.RETR_LIST,cv.CHAIN_APPROX_SIMPLE)
 
 print(f'{len(contours)} contour(s) found!')
 
@@ -32,6 +32,7 @@ print(f'{len(contours)} contour(s) found!')
 cv.drawContours(blank,contours,-1,(0,0,255),1)
 
 cv.imshow('Contours Drawn',blank)
+
 
 
 
