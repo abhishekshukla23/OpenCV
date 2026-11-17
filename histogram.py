@@ -1,0 +1,63 @@
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+
+img=cv.imread('photos/spidermanTwo.jpg')
+cv.imshow('Spiderman',img)
+
+#histogram for grayscale images
+
+
+
+
+blank=np.zeros(img.shape[:2],dtype='uint8')
+
+# gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+# cv.imshow('Gray',gray)
+
+mask=cv.circle(blank,(img.shape[1]//2,img.shape[0]//2-100),100,255,-1)
+
+masked=cv.bitwise_and(img,img,mask=mask)
+
+cv.imshow('Mask',masked)
+
+
+
+
+# gray_hist=cv.calcHist([gray],[0],mask,[256],[0,256]) 
+
+plt.figure()
+plt.title('Grayscale Histogram')
+plt.xlabel('bins')
+plt.ylabel('no of pixels')
+# plt.plot(gray_hist)
+# plt.xlim([200,400])
+# plt.show()
+
+#color image histogram
+
+colors=('b','g','r')
+
+for i,col in enumerate(colors):
+    hist=cv.calcHist([img],[i],masked,[256],[0,256])
+    plt.plot(hist,color=col)
+    plt.xlim(0,256)
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cv.waitKey(5000)
